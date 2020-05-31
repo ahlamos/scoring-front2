@@ -112,7 +112,7 @@ class InfoPerso2 extends Component {
 
     handleSubmit = key => {
         const token=localStorage.getItem("token")
-        fetch('http://localhost:9099/infoClients/'+key, {
+        fetch('https://scoring-back-heroku.herokuapp.com/infoClients/'+key, {
             method: 'PATCH',
             body: JSON.stringify(
                 {
