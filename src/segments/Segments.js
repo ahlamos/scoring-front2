@@ -16,7 +16,7 @@ class AjoutSegment extends Component {
     }
 
     componentDidMount() {
-      var url="http://localhost:9099/segments?projection=segNot"; 
+      var url="https://scoring-back-heroku.herokuapp.com/segments?projection=segNot"; 
       fetch(url, {
         method: "GET",
         headers: {
@@ -68,7 +68,7 @@ class AjoutSegment extends Component {
     }
 
     handleSubmit = (event) =>{
-      var url="http://localhost:9099/majSegments";
+      var url="https://scoring-back-heroku.herokuapp.com/majSegments";
       console.log("length= "+this.state.segments.length)
       fetch(url, {
           method: "POST",
