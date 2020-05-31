@@ -19,7 +19,7 @@ class listeRegles extends Component {
 
     componentDidMount() {
         var url=""; var url2="";
-        url="http://localhost:9099/rules?size=200"; url2="http://localhost:9099/conditionses?size=200";
+        url="https://scoring-back-heroku.herokuapp.com/rules?size=200"; url2="https://scoring-back-heroku.herokuapp.com/conditionses?size=200";
         fetch(url, {
             method: "GET",
             headers: {
@@ -71,7 +71,7 @@ class listeRegles extends Component {
     }
 
     handleSubmit = key => {
-        fetch('http://localhost:9099/rules/'+key, {
+        fetch('https://scoring-back-heroku.herokuapp.com/rules/'+key, {
             method: 'PATCH',
             body: JSON.stringify(
             {
@@ -93,7 +93,7 @@ class listeRegles extends Component {
 
 
     handleSubmitForAdd = () =>{
-        var url="http://localhost:9099/rules/";
+        var url="https://scoring-back-heroku.herokuapp.com/rules/";
         fetch(url, {
             method: "POST",
             headers: {"content-type": "application/json",
@@ -135,7 +135,7 @@ class listeRegles extends Component {
     }
 
     handleDelete = (key) =>{
-        fetch('http://localhost:9099/rules/'+key , {
+        fetch('https://scoring-back-heroku.herokuapp.com/rules/'+key , {
             method: "DELETE",
             headers: {
                 "content-type": "application/json",
