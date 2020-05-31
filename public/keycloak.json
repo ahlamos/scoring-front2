@@ -1,9 +1,8 @@
 {
   "realm": "plateforme-scoring",
-  "auth-server-url": "http://localhost:9098/auth/",
+  "auth-server-url": "https://heroku-keycloak.herokuapp.com/auth/",
   "ssl-required": "external",
   "resource": "plateforme-client",
   "public-client": true,
   "confidential-port": 0
 }
-
