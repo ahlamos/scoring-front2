@@ -17,7 +17,7 @@ class listeConditions extends Component {
     componentDidMount() {
         if(this.props.location.state===undefined) {
             var url="";
-            url="http://localhost:9099/conditionses";
+            url="https://scoring-back-heroku.herokuapp.com/conditionses";
             fetch(url, {
                 method: "GET",
                 headers: {
@@ -49,7 +49,7 @@ class listeConditions extends Component {
     }
 
     handleSubmitForAdd = () =>{
-        var url="http://localhost:9099/conditionses/";
+        var url="https://scoring-back-heroku.herokuapp.com/conditionses/";
         fetch(url, {
             method: "POST",
             headers: {"content-type": "application/json",
@@ -65,7 +65,7 @@ class listeConditions extends Component {
       }
 
     handleSubmit = key => {
-        fetch('http://localhost:9099/conditionses/'+key, {
+        fetch('https://scoring-back-heroku.herokuapp.com/'+key, {
             method: 'PATCH',
             body: JSON.stringify(
             {
@@ -106,7 +106,7 @@ class listeConditions extends Component {
 
 
     handleDelete = (key) =>{
-        fetch('http://localhost:9099/conditionses/'+key , {
+        fetch('https://scoring-back-heroku.herokuapp.com/'+key , {
             method: "DELETE",
             headers: {
                 "content-type": "application/json",
