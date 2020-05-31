@@ -12,7 +12,7 @@ class listeClients extends Component {
     }
     componentDidMount() {
             var url="";
-            url="http://localhost:9099/clients";
+            url="https://scoring-back-heroku.herokuapp.com/clients";
             fetch(url, {
                 method: "GET",
                 headers: {
@@ -38,7 +38,7 @@ class listeClients extends Component {
     }
 
     handleSubmit = id => {
-        fetch('http://localhost:9099/majClient/'+id, {
+        fetch('https://scoring-back-heroku.herokuapp.com/majClient/'+id, {
             method: 'PATCH',
             body: JSON.stringify(
                 {   
@@ -69,7 +69,7 @@ class listeClients extends Component {
 
 
     handleDelete = (key) =>{
-        fetch('http://localhost:9099/clients/'+key , {
+        fetch('https://scoring-back-heroku.herokuapp.com/clients/'+key , {
             method: "DELETE",
             headers: {
                 "content-type": "application/json",
@@ -85,7 +85,7 @@ class listeClients extends Component {
     }
 
     addClient = () => {
-        fetch('http://localhost:9099/ajouterClient' , {
+        fetch('https://scoring-back-heroku.herokuapp.com/ajouterClient' , {
             method: "POST",
             body: JSON.stringify(
                 {
