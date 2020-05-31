@@ -26,7 +26,7 @@ class StatutDemande extends Component {
     }
 
     handleAccept = (key) =>{
-        fetch('http://localhost:9099/updateStatut/'+key , {
+        fetch('https://scoring-back-heroku.herokuapp.com/updateStatut/'+key , {
             method: "PATCH",
             body: "ACCEPTE",
             headers: {
@@ -45,7 +45,7 @@ class StatutDemande extends Component {
     }
     handleRejet = (key) =>{
         console.log("ksdkb;k")
-        fetch('http://localhost:9099/updateStatut/'+key , {
+        fetch('https://scoring-back-heroku.herokuapp.com/updateStatut/'+key , {
             method: "PATCH",
             body: "REJETTE",
             headers: {
