@@ -21,7 +21,7 @@ class Recapitulatif extends Component {
         this.setState({data:JSON.parse(sessionStorage.getItem("data"))})
         this.setState({revenuMensuelTotal:sessionStorage.getItem("revenuMensuelTotal")})
        setTimeout(()=>{
-           fetch('http://localhost:9099/demandeCredits/'+sessionStorage.getItem("key"), {
+           fetch('https://scoring-back-heroku.herokuapp.com/demandeCredits/'+sessionStorage.getItem("key"), {
                method: 'PATCH',
                body: JSON.stringify(
                    {
