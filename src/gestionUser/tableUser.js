@@ -20,7 +20,7 @@ class GestionUser extends Component {
     }
 
     componentDidMount() {
-        var url="http://localhost:9098/auth/admin/realms/plateforme-scoring/users";
+        var url="https://heroku-keycloak.herokuapp.com/auth/admin/realms/plateforme-scoring/users";
         fetch(url, {
             method: "GET",
             headers: {
@@ -57,7 +57,7 @@ class GestionUser extends Component {
 
     handleUpdate = (key) =>{
         console.log(key)
-        fetch('http://localhost:9098/auth/admin/realms/plateforme-scoring/users/'+key , {
+        fetch('https://heroku-keycloak.herokuapp.com/auth/admin/realms/plateforme-scoring/users/'+key , {
             method: "PUT",
             body: JSON.stringify(
                 {
@@ -87,7 +87,7 @@ class GestionUser extends Component {
 
         handleUpdateRole = (key) =>{
 
-            fetch('http://localhost:9098/auth/admin/realms/plateforme-scoring/users/'+key+'/role-mappings/realm' , {
+            fetch('https://heroku-keycloak.herokuapp.com/auth/admin/realms/plateforme-scoring/users/'+key+'/role-mappings/realm' , {
                 method: "DELETE",
                 headers: {
                     "content-type": "application/json",
@@ -108,7 +108,7 @@ class GestionUser extends Component {
                 resultat=roles[index];
             }
         }
-        fetch('http://localhost:9098/auth/admin/realms/plateforme-scoring/users/'+key+'/role-mappings/realm' , {
+        fetch('https://heroku-keycloak.herokuapp.com/auth/admin/realms/plateforme-scoring/users/'+key+'/role-mappings/realm' , {
             method: "POST",
             body:JSON.stringify([
                 {
@@ -133,7 +133,7 @@ class GestionUser extends Component {
 
 
     handleDelete = (key) =>{
-        fetch('http://localhost:9098/auth/admin/realms/plateforme-scoring/users/'+key , {
+        fetch('https://heroku-keycloak.herokuapp.com/auth/admin/realms/plateforme-scoring/users/'+key , {
             method: "DELETE",
             headers: {
                 "content-type": "application/json",
@@ -149,7 +149,7 @@ class GestionUser extends Component {
     }
 
     addUser = () => {
-        fetch('http://localhost:9098/auth/admin/realms/plateforme-scoring/users' , {
+        fetch('https://heroku-keycloak.herokuapp.com/auth/admin/realms/plateforme-scoring/users' , {
             method: "POST",
             body: JSON.stringify(
                 {
@@ -200,7 +200,7 @@ class GestionUser extends Component {
     }
 
     getRoleOfUser = (key) =>{
-        var url="http://localhost:9098/auth/admin/realms/plateforme-scoring/users/"+key+"/role-mappings/realm";
+        var url="https://heroku-keycloak.herokuapp.com/auth/admin/realms/plateforme-scoring/users/"+key+"/role-mappings/realm";
         fetch(url, {
             method: "GET",
             headers: {
