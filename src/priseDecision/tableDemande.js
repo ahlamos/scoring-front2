@@ -19,7 +19,7 @@ class TableDemande extends Component {
 
     componentDidMount() {
             var url="";
-            url="http://localhost:9099/demandeCredits";
+            url="https://scoring-back-heroku.herokuapp.com/demandeCredits";
             fetch(url, {
                 method: "GET",
                 headers: {
