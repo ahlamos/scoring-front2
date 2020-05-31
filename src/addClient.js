@@ -9,7 +9,7 @@ class AjouterClient extends Component {
         }
     }
     handleSubmit = (event) => {
-        fetch('http://localhost:9099/ajouterClient/', {
+        fetch('https://scoring-back-heroku.herokuapp.com/ajouterClient/', {
             method: 'POST',
             body: JSON.stringify(
                 {
