@@ -37,7 +37,7 @@ class GererProfil extends Component {
             alert("Les deux passwords sont différents")
         }
         else {
-            fetch('http://localhost:9098/auth/admin/realms/plateforme-scoring/users/'+id+'/reset-password', {
+            fetch('https://heroku-keycloak.herokuapp.com/auth/admin/realms/plateforme-scoring/users/'+id+'/reset-password', {
                 method: 'PUT',
                 body: JSON.stringify(
                     {
