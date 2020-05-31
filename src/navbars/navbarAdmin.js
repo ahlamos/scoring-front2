@@ -14,7 +14,7 @@ class NavbarAdmin extends Component {
 
     componentDidMount() {
         const token = localStorage.getItem("token")
-        fetch('http://localhost:9098/auth/admin/realms/plateforme-scoring/roles', {
+        fetch('https://heroku-keycloak.herokuapp.com/auth/admin/realms/plateforme-scoring/roles', {
             method: "GET",
             headers: {
                 "content-type": "application/json",
