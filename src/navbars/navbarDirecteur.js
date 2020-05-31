@@ -11,7 +11,7 @@ class NavbarDirecteur extends Component {
     }
     componentDidMount() {
         const token=localStorage.getItem("token")
-        fetch('http://localhost:9099/clients', {
+        fetch('https://scoring-back-heroku.herokuapp.com/clients', {
             method: "GET",
             headers: {
                 "content-type": "application/json",
