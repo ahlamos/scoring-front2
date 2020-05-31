@@ -56,7 +56,7 @@ class Projet extends Component {
     componentDidMount() {
 
         var url = "";
-        url = "http://localhost:9099/clients/search/findByCIN?CIN=" + this.props.cin;
+        url = "https://scoring-back-heroku.herokuapp.com/clients/search/findByCIN?CIN=" + this.props.cin;
 
         fetch(url, {
             method: "GET",
@@ -125,7 +125,7 @@ class Projet extends Component {
 
     handleSubmit = key => {
         const token=localStorage.getItem("token")
-        fetch('http://localhost:9099/infoClients/'+key, {
+        fetch('https://scoring-back-heroku.herokuapp.com/infoClients/'+key, {
             method: 'PATCH',
             body: JSON.stringify(
                 {
