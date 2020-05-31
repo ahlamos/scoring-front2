@@ -70,7 +70,7 @@ class ChargeMensuel extends Component {
         var tauxEndettement=(somme*100)/parseFloat(revenuMensuelTotal)
 
         console.log(tauxEndettement)
-        fetch('http://localhost:9099/calculerScore/'+key, {
+        fetch('https://scoring-back-heroku.herokuapp.com/calculerScore/'+key, {
             method: 'PATCH',
             body: tauxEndettement,
             headers: {
