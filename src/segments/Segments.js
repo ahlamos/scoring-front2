@@ -16,7 +16,7 @@ class AjoutSegment extends Component {
     }
 
     componentDidMount() {
-      var url="https://scoring-back-heroku.herokuapp.com/segments"; 
+      var url="https://scoring-back-heroku.herokuapp.com/segments?projection=segNot"; 
       fetch(url, {
         method: "GET",
         headers: {
