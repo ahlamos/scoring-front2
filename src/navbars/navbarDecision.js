@@ -6,13 +6,14 @@ class NavbarDecision extends Component {
         super(props);
         this.state={
             demandeCredits:[],
-             clients:''
+             clients:'',
+            notations:[],
         }}
 
 
     componentDidMount() {
         const token=localStorage.getItem("token")
-        fetch('http://localhost:9099/clients', {
+        fetch('https://scoring-back-heroku.herokuapp.com/clients', {
             method: "GET",
             headers: {
                 "content-type": "application/json",
@@ -21,6 +22,22 @@ class NavbarDecision extends Component {
         })
             .then(response => response.json())
             .then(responseJson => this.setState({clients: responseJson._embedded.clients}))
+            .catch(() => {
+                this.setState({message: 'erreur'})
+            })
+        fetch('https://scoring-back-heroku.herokuapp.com/notations', {
+            method: "GET",
+            headers: {
+                "content-type": "application/json",
+                "Authorization": "Bearer "+localStorage.getItem("token"),
+            },
+        })
+            .then(response => response.json())
+            .then(responseJson => {
+                    this.setState({notations: responseJson._embedded.notations})
+                    console.log(this.state.notations)
+                }
+            )
             .catch(() => {
                 this.setState({message: 'erreur'})
             })
@@ -35,8 +52,11 @@ class NavbarDecision extends Component {
     }
 
     render(){
+        var notations=[]
+        this.state.notations.forEach(function(notation,indexN){
+            notations.push(notation.notation)
+        })
         var  t=[]
-        var notations=['A','B','C','D','E','F']
         var resultat=0
 
         var clients=this.state.clients
@@ -71,7 +91,7 @@ class NavbarDecision extends Component {
                             <Link to={{pathname: '/historique'}} className="nav-link">Statut des décision                              utilisateurs</Link>
                         </li>
                         <li>
-                            <Link to={{pathname: '/Statistiques', query: t,}}
+                            <Link to={{pathname: '/Statistiques', query: t,notations:notations}}
                                   className="nav-link">Statistiques</Link>
                         </li>
             
