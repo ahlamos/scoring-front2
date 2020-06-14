@@ -104,7 +104,7 @@ class SituationProfessionnelle extends Component {
         var ans=parseInt(duree1[1])
         var date=new Date()
         var resultat= (date.getFullYear()-ans)*12 + (date.getMonth()+1-mois)
-        fetch('http://localhost:9099/infoClients/'+key, {
+        fetch('https://scoring-back-heroku.herokuapp.com/infoClients/'+key, {
             method: 'PATCH',
             body: JSON.stringify(
                 {
