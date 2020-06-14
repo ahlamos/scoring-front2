@@ -9,21 +9,7 @@ class NavbarDirecteur extends Component {
     }
 
     }
-    componentDidMount() {
-        const token=localStorage.getItem("token")
-        fetch('https://scoring-back-heroku.herokuapp.com/clients', {
-            method: "GET",
-            headers: {
-                "content-type": "application/json",
-                "Authorization": "Bearer "+localStorage.getItem("token"),
-            },
-        })
-            .then(response => response.json())
-            .then(responseJson => this.setState({clients: responseJson._embedded.clients}))
-            .catch(() => {
-                this.setState({message: 'erreur'})
-            })
-    }
+    
     logout() {
         localStorage.setItem("keycloak","")
         localStorage.setItem("roles","")
@@ -32,23 +18,7 @@ class NavbarDirecteur extends Component {
 
 
     render(){
-        var  t=[]
-        var notations=['A','B','C','D','E','F']
-        var resultat=0
-
-        var clients=this.state.clients
-
-        notations.forEach(function(notation,indexN){
-            resultat=0
-            for(var index=0;clients[index];index++){
-                if(clients[index].notation!=null) {
-                if(new String(clients[index].notation.notation).trim()===new String(notation).trim())
-                    resultat=resultat+1
-                }
-            }
-            t.push(resultat)
-        })
-
+      
 
         return(
             <header className="public_header">
@@ -63,10 +33,7 @@ class NavbarDirecteur extends Component {
                             <Link to={{pathname: '/clients'}} className="nav-link">Gestion des clients</Link>
                         </li>
 
-                        <li>
-                            <Link to={{pathname: '/Statistiques', query: t,}}
-                                  className="nav-link">Statistiques</Link>
-                        </li>
+                       
                         <li>
                             <Link to={{pathname: '/gererProfil'}} className="nav-link">Gestion
                                 Profil</Link>
