@@ -60,7 +60,6 @@ class listeConditions extends Component {
               operation: this.state.operation
               })
         })
-        alert("la condition a été ajoutée avec succès")
         window.location.reload();
       }
 
@@ -82,7 +81,6 @@ class listeConditions extends Component {
         .catch(err => {
                 console.error(err)
         });
-      alert("Les données sont modifiées, Merci !");
       window.location.reload();
     }
 
@@ -117,7 +115,6 @@ class listeConditions extends Component {
           .catch(err => {
                 console.error(err)
         });
-        alert("la condition a été supprimée !");
         window.location.reload();
     }
 
