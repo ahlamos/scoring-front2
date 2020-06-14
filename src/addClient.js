@@ -28,7 +28,6 @@ class AjouterClient extends Component {
                 Authorization: "Bearer "+localStorage.getItem("token")
             }
         })
-        alert("le client a été ajoutée avec succès")
         window.location.reload();
     }
 
