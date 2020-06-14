@@ -57,7 +57,8 @@ class SituationProfessionnelle extends Component {
             selectedStatut:"",
             selectedContrat:"",
             selectedClassification:"",
-            hidden:true
+            hidden:true,
+            hiddenContart:true
         }
     }
     handleChange1 = event => {
@@ -65,6 +66,11 @@ class SituationProfessionnelle extends Component {
         console.log(target.id)
         var selected=parseInt(target.id[26])
         var option=statut[selected]
+        this.setState({hiddenContart:false})
+        if(option.title === "Indépendant" || option.title === "Retraité"){
+            this.setState({hiddenContart:true})
+            this.setState({hidden:true})
+        }
         console.log(option.title)
         this.setState({selectedStatut:option.title})
     }
@@ -98,7 +104,7 @@ class SituationProfessionnelle extends Component {
         var ans=parseInt(duree1[1])
         var date=new Date()
         var resultat= (date.getFullYear()-ans)*12 + (date.getMonth()+1-mois)
-        fetch('https://scoring-back-heroku.herokuapp.com/infoClients/'+key, {
+        fetch('http://localhost:9099/infoClients/'+key, {
             method: 'PATCH',
             body: JSON.stringify(
                 {
@@ -169,7 +175,7 @@ class SituationProfessionnelle extends Component {
                                 />
                             </div>
 
-                            <div className="group" >
+                            <div className="group" hidden={this.state.hiddenContart}>
                                 <Autocomplete
                                     {...typeContrat}
                                     id="typeContrat"
