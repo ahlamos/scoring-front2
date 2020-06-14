@@ -32,7 +32,7 @@ class AjoutSegment extends Component {
     }
 
     handleSubmitForAdd = (event) =>{
-      if(this.state.fin<=this.state.segments[this.state.segments.length-1].fin) alert("la fin ne peut pas etre <"+this.state.segments[this.state.segments.length-1].fin)
+      if(this.state.fin<=this.state.segments[this.state.segments.length-1].fin) console.log("la fin ne peut pas etre <"+this.state.segments[this.state.segments.length-1].fin)
       else {
       const segment= {
         debut:this.state.segments[this.state.segments.length-1].fin,
@@ -78,7 +78,6 @@ class AjoutSegment extends Component {
         },
           body: JSON.stringify(this.state.segments)
       })
-      alert("la mise a jour a été faite")
       event.preventDefault();
 
     }
