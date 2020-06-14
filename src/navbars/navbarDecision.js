@@ -5,10 +5,26 @@ class NavbarDecision extends Component {
     constructor(props){
         super(props);
         this.state={
-            demandeCredits:[]
+            demandeCredits:[],
+             clients:''
         }}
 
 
+    componentDidMount() {
+        const token=localStorage.getItem("token")
+        fetch('http://localhost:9099/clients', {
+            method: "GET",
+            headers: {
+                "content-type": "application/json",
+                "Authorization": "Bearer "+localStorage.getItem("token"),
+            },
+        })
+            .then(response => response.json())
+            .then(responseJson => this.setState({clients: responseJson._embedded.clients}))
+            .catch(() => {
+                this.setState({message: 'erreur'})
+            })
+    }
 
     logout() {
 
@@ -19,6 +35,23 @@ class NavbarDecision extends Component {
     }
 
     render(){
+        var  t=[]
+        var notations=['A','B','C','D','E','F']
+        var resultat=0
+
+        var clients=this.state.clients
+
+        notations.forEach(function(notation,indexN){
+            resultat=0
+            for(var index=0;clients[index];index++){
+                if(clients[index].notation!=null) {
+                if(new String(clients[index].notation.notation).trim()===new String(notation).trim())
+                    resultat=resultat+1
+                }
+            }
+            t.push(resultat)
+        })
+
 
         return (
             <header className="public_header">
@@ -37,6 +70,11 @@ class NavbarDecision extends Component {
                         <li>
                             <Link to={{pathname: '/historique'}} className="nav-link">Statut des décision                              utilisateurs</Link>
                         </li>
+                        <li>
+                            <Link to={{pathname: '/Statistiques', query: t,}}
+                                  className="nav-link">Statistiques</Link>
+                        </li>
+            
                         <li>
                             <Link to={{pathname: '/gererProfil'}} className="nav-link">Gestion
                                 Profil</Link>
