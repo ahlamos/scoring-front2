@@ -25,7 +25,9 @@ class ChargeMensuel extends Component {
             notation:"",
             information:"",
             data:"",
-            key:""
+            key:"",
+            erreurMsg:false,
+            loading:false,
 
 
         }
@@ -70,6 +72,7 @@ class ChargeMensuel extends Component {
         var tauxEndettement=(somme*100)/parseFloat(revenuMensuelTotal)
 
         console.log(tauxEndettement)
+        this.setState( {loading:true})
         fetch('https://scoring-back-heroku.herokuapp.com/calculerScore/'+key, {
             method: 'PATCH',
             body: tauxEndettement,
@@ -98,9 +101,12 @@ class ChargeMensuel extends Component {
                 sessionStorage.setItem("key",key)
                 sessionStorage.setItem("notation","")
                 sessionStorage.setItem("notation",this.state.data.notation.notation)
+                this.setState( {loading:false})
+                this.setState({test:true})
             })
             .catch(err => {
                 console.error(err)
+                this.setState({erreurMsg:true})
             })
         console.log(chargeMensuelle)
         console.log(montantVersement)
@@ -184,14 +190,16 @@ class ChargeMensuel extends Component {
 
 
 
-                            <div className="btn-box">
+                           <div className="btn-box">
                                 <button className="btn btn-submit" type="submit"
-                                        onClick={() => this.handleSubmit(this.state.client.id)}>Suivant
+                                        onClick={() => this.handleSubmit(this.state.client.id)}
+                                        disabled={this.state.loading}>
+                                    {this.state.loading && <i className="fa fa-refresh fa-spin"></i>}
+                                    {this.state.loading && <span>Enregistrement des données dans le serveur</span>}
+                                    {!this.state.loading && <span>Suivant</span>}
                                 </button>
-                                <Link to="/situationFinanciere">
-                                    <button className="btn btn-cancel" type="button">Retour</button>
-
-                                </Link>
+                                <br />
+                                {this.state.erreurMsg && <h4 style={{color:"red"}}>un erreur est survenue dans la connexion avec le serveur</h4>}
                             </div>
 
 
