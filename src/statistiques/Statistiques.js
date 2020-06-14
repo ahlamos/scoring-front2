@@ -34,7 +34,7 @@ class Statistiques extends Component {
     componentWillMount(){
         this.setState({
             chartData:{
-                labels: ['A', 'B', 'C', 'D', 'E', 'F'],
+                labels: this.props.location.notations,
                 datasets:[
                     {
                         label:'Notation',
