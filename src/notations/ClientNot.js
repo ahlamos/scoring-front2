@@ -56,7 +56,6 @@ class listeClients extends Component {
                 Authorization: "Bearer "+localStorage.getItem("token")
             }
         })
-        alert("la mise à jour a été faite avec succès")
     }
 
     delete = (name,id) =>{
@@ -80,7 +79,6 @@ class listeClients extends Component {
           .catch(err => {
                 console.error(err)
         });
-        alert("le client a été supprimé !");
         window.location.reload();
     }
 
@@ -108,7 +106,6 @@ class listeClients extends Component {
                 console.error(err)
             });
 
-        alert("utilisateur ajouté");
         window.location.reload();
 
 
