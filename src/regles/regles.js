@@ -87,7 +87,6 @@ class listeRegles extends Component {
         .catch(err => {
                 console.error(err)
         });
-      alert("Les données sont modifiées, Merci !");
       window.location.reload();
     }
 
@@ -104,7 +103,6 @@ class listeRegles extends Component {
               conditions: this.state.conditionsNv
               })
         })
-        alert("la règle a été ajoutée avec succès")
         window.location.reload();
       }
 
@@ -146,7 +144,6 @@ class listeRegles extends Component {
           .catch(err => {
                 console.error(err)
         });
-        alert("la règle a été supprimée");
         window.location.reload();
     }
 
