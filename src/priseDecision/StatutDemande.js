@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import '../formulaire.css'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
+import { Redirect } from 'react-router';
 import Checkbox from '@material-ui/core/Checkbox';
 import HistoriqueDemande from "./historiqueDemande";
 import InfoPerso from "../InfoClients/InfoPerso";
@@ -12,7 +12,10 @@ class StatutDemande extends Component {
         this.state={
             informations:[],
             informationsaChercher:[],
-            statut:false
+            statut:false,
+            message:"",
+            nom:"",
+            email:""
 
 
 
@@ -24,7 +27,29 @@ class StatutDemande extends Component {
         const { demandeCredits } = this.props.location.query;
         this.setState({informations: demandeCredits, informationsaChercher:demandeCredits})
     }
+    sendFeedback (templateId, variables) {
+        window.emailjs.send(
+            'gmail', templateId,
+            variables
+        ).then(res => {
+            console.log('Email successfully sent!')
+            window.location.assign('https://scoring-front-heroku.herokuapp.com/demandeCredit')
 
+
+        })
+        // Handle errors here however you like, or use a React error boundary
+            .catch(err => console.error('Oh well, you failed. Here some thoughts on the error that occured:', err))
+    }
+    handleChange = event => {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+        this.setState({
+            [name]: value,
+        })
+
+
+    }
     handleAccept = (key) =>{
         fetch('https://scoring-back-heroku.herokuapp.com/updateStatut/'+key , {
             method: "PATCH",
@@ -38,6 +63,11 @@ class StatutDemande extends Component {
             .catch(err => {
                 console.error(err)
             });
+        const name=this.state.informations.nom
+        const email=this.state.informations.email
+        const message="Felicitations votre demande de credit est acceptee"
+        const templateId = 'template_RvFAArwr';
+        this.sendFeedback(templateId, {message_html: message, to_name: name, toEmail: email})
         this.setState({statut:true})
 
 
@@ -58,6 +88,13 @@ class StatutDemande extends Component {
                 console.error(err)
             });
 
+        const name=this.state.informations.nom
+        const email=this.state.informations.email
+        console.log(email)
+        const message="Malheureusement votre demande de credit est rejettee : Motif: "+this.state.motif
+        const templateId = 'template_RvFAArwr';
+        this.sendFeedback(templateId, {message_html: message, to_name: name, toEmail: email})
+
         this.setState({statut:true})
 
     }
@@ -68,7 +105,7 @@ class StatutDemande extends Component {
         var dataRejet=[this.state.informations.identificateur,this.state.informations.dateDemande,"REJETE"]
 
         if(this.state.statut){
-            return <TableDemande/>
+           return <Redirect push to="/demandeCredit" />;
         }
         else
 
@@ -195,7 +232,8 @@ class StatutDemande extends Component {
 
                                                         <form onSubmit={() => this.handleRejet(this.state.informations.identificateur)}>
                                                             <div className="group">
-                                                                <textarea type="textarea" rows="5"
+                                                                 <textarea type="textarea" rows="5" name="motif"
+                                                                          onChange={this.handleChange}
                                                                           required="required"></textarea><span
                                                                 className="highlight"></span><span
                                                                 className="bar"></span>
