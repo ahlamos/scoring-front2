@@ -18,8 +18,12 @@ class Recapitulatif extends Component {
     }
 
     componentDidMount() {
+        const client=JSON.parse(sessionStorage.getItem("client"))
         this.setState({data:JSON.parse(sessionStorage.getItem("data"))})
         this.setState({revenuMensuelTotal:sessionStorage.getItem("revenuMensuelTotal")})
+        this.setState({client:client})
+        
+        
        setTimeout(()=>{
            fetch('https://scoring-back-heroku.herokuapp.com/demandeCredits/'+sessionStorage.getItem("key"), {
                method: 'PATCH',
@@ -29,6 +33,8 @@ class Recapitulatif extends Component {
                        montantProjet: this.state.data.montantProjet,
                        dureeRemboursement:this.state.data.dureeRemboursement,
                        natureProjet:this.state.data.natureProjet,
+                       email:this.state.client.email,
+                       nom:this.state.client.nom,
                        montantMensuel:this.state.data.montantMensuel,
                        taeg:this.state.data.taeg,
                        montantTotalDu:serviceName.sharedData,
