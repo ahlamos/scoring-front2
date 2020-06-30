@@ -47,12 +47,12 @@ class SituationFinanciere extends Component {
     }
 
     handleSubmit = key => {
-        var revenuMensuel=parseFloat(this.refs["revenuMensuel"+key].value)
+        var revenuMensuel=this.refs["revenuMensuel"+key].value!="" ?parseFloat(this.refs["revenuMensuel"+key].value):0
         var nbMois=parseInt(this.state.selectedNbMois)
-        var prestationFamiliale=parseFloat(this.refs["prestationFamiliale"+key].value)
-        var aides=parseFloat(this.refs["aides"+key].value)
-        var rente=parseFloat(this.refs["rente"+key].value)
-        var autreRevenu=parseFloat(this.refs["autreRevenu"+key].value)
+        var prestationFamiliale=this.refs["prestationFamiliale"+key].value!="" ?parseFloat(this.refs["prestationFamiliale"+key].value):0
+        var aides=this.refs["aides"+key].value!="" ?parseFloat(this.refs["aides"+key].value):0
+        var rente=this.refs["rente"+key].value!="" ?parseFloat(this.refs["rente"+key].value):0
+        var autreRevenu=this.refs["autreRevenu"+key].value!="" ?parseFloat(this.refs["autreRevenu"+key].value):0
         this.setState({
             revenuMensuelTotal:(((revenuMensuel * nbMois)/12) + (prestationFamiliale+aides+rente+autreRevenu))
 
@@ -106,12 +106,12 @@ class SituationFinanciere extends Component {
                 <div className="wrapper">
                     <center><Stepper level="4" /></center>
 
-                    <form>
+                    <form onSubmit={() => this.handleSubmit(this.state.infoClient.id)}>
                         <h1>Situation Financiere</h1>
 
 
                         <div className="group">
-                            <input  id="revenuMensuel" name="revenuMensuel" type="text"
+                            <input  id="revenuMensuel" name="revenuMensuel" type="number"
                                    onChange={this.handleChange} ref={"revenuMensuel" + this.state.client.id} required={required}/>
                             <span className="highlight"></span><span
                             className="bar"></span>
@@ -142,29 +142,29 @@ class SituationFinanciere extends Component {
                         </div>
 
                         <div className="group" hidden={!this.state.checked}>
-                            <input id="prestationFamiliale" name="prestationFamiliale" type="text"
-                                   onChange={this.handleChange}  ref={"prestationFamiliale" + this.state.client.id} required={required}/>
+                            <input id="prestationFamiliale" name="prestationFamiliale" type="number"
+                                   onChange={this.handleChange}  ref={"prestationFamiliale" + this.state.client.id} />
                             <span className="highlight"></span><span
                             className="bar"></span>
                             <label htmlFor="cin">Montant Prestation familiale</label>
                         </div>
                         <div className="group" hidden={!this.state.checked}>
-                            <input  id="aides" name="aides" type="text"
-                                   onChange={this.handleChange}  ref={"aides" + this.state.client.id} required={required}/>
+                            <input  id="aides" name="aides" type="number"
+                                   onChange={this.handleChange}  ref={"aides" + this.state.client.id}/>
                             <span className="highlight"></span><span
                             className="bar"></span>
                             <label htmlFor="cin">Montant Aides</label>
                         </div>
                         <div className="group" hidden={!this.state.checked}>
-                            <input id="rente" name="rente" type="text"
-                                   onChange={this.handleChange}  ref={"rente" + this.state.client.id} required={required}/>
+                            <input id="rente" name="rente" type="number"
+                                   onChange={this.handleChange}  ref={"rente" + this.state.client.id} />
                             <span className="highlight"></span><span
                             className="bar"></span>
                             <label htmlFor="cin">Montant Rente</label>
                         </div>
                         <div className="group" hidden={!this.state.checked}>
-                            <input  id="autreRevenu" name="autreRevenu" type="text"
-                                   onChange={this.handleChange}  ref={"autreRevenu" + this.state.client.id} required={required}/>
+                            <input  id="autreRevenu" name="autreRevenu" type="number"
+                                   onChange={this.handleChange}  ref={"autreRevenu" + this.state.client.id} />
                             <span className="highlight"></span><span
                             className="bar"></span>
                             <label htmlFor="cin">Montant d Autres revenus</label>
@@ -172,8 +172,7 @@ class SituationFinanciere extends Component {
 
 
                         <div className="btn-box">
-                            <button className="btn btn-submit" type="submit"
-                                    onClick={() => this.handleSubmit(this.state.infoClient.id)}>Suivant
+                            <button className="btn btn-submit" type="submit">Suivant
                             </button>
                             <Link to="/situationProfessionnelle">
                                 <button className="btn btn-cancel" type="button">Retour</button>
