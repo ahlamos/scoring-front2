@@ -222,7 +222,7 @@ class Projet extends Component {
 
 
                                     <div  className="group">
-                                        <input  id="credit" name="credit" type="text"onChange={this.handleChange4}
+                                        <input  id="credit" name="credit" type="number"onChange={this.handleChange4}
                                                 ref={"credit"+this.state.client.id} required="required"/>
                                         <span className="highlight"></span><span
                                         className="bar"></span>
