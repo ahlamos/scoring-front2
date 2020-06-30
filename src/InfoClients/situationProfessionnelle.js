@@ -186,15 +186,14 @@ class SituationProfessionnelle extends Component {
                                 />
                             </div>
 
-                            <div className="group" hidden={this.state.hidden}>
+                           <div className="group" hidden={this.state.hidden}>
                                 <Autocomplete
                                     {...Classification}
                                     id="classification"
                                     onChange={this.handleChange3}
                                     debug
                                     name="classification"
-                                    renderInput={(params) => <TextField {...params} label="Classification" margin="normal"
-                                
+                                    renderInput={(params) => <TextField {...params} label="Classification" margin="normal"/>}
                                 />
                             </div>
 
