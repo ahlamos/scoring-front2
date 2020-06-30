@@ -125,6 +125,7 @@ class Projet extends Component {
 
     handleSubmit = key => {
         const token=localStorage.getItem("token")
+        var montant=this.refs["montant"+key].value!="" ?parseFloat(this.refs["montant"+key].value):0
         fetch('https://scoring-back-heroku.herokuapp.com/infoClients/'+key, {
             method: 'PATCH',
             body: JSON.stringify(
@@ -133,7 +134,7 @@ class Projet extends Component {
                     credit: this.refs["credit"+key].value,
                     mois: this.refs["mois"+key].value,
                     taeg: this.refs["taeg"+key].value,
-                    montant: this.refs["montant"+key].value,
+                    montant: montant,
 
 
                 }),
@@ -147,7 +148,7 @@ class Projet extends Component {
             .catch(err => {
                 console.error(err)
             })
-        var montant=this.refs["montant"+key].value!="" ?parseFloat(this.refs["montant"+key].value):0
+        
         var taux=(montant*100*12)/(parseFloat(this.refs["credit"+key].value) * (parseFloat(this.refs["mois"+key].value)/12))
         var TAEG=parseFloat(this.refs["taeg"+key].value) +taux
         var tauxFinal=TAEG/(100 *12)
@@ -176,8 +177,8 @@ class Projet extends Component {
             dureeRemboursement: this.refs["mois"+key].value,
             montantMensuel: resultat,
             taeg: this.refs["taeg"+key].value,
-            assurance: this.refs["montant"+key].value,
-            assuranceTotale: parseFloat(this.refs["montant"+key].value)*12,
+            assurance: montant,
+            assuranceTotale: montant*12,
             montantTotalDu:this.state.montantTotalDu
         }))
         this.setState({test:true})
@@ -229,14 +230,14 @@ class Projet extends Component {
                                     </div>
 
                                     <div className="group">
-                                        <input id="mois" name="mois" type="text"
+                                        <input id="mois" name="mois" type="number"
                                                onChange={this.handleChange} ref={"mois" + this.state.client.id} required={required}/>
                                         <span className="highlight"></span><span
                                         className="bar"></span>
                                         <label htmlFor="cin">Nombre de mois</label>
                                     </div>
                                     <div className="group">
-                                        <input  id="taeg" name="taeg" type="text"
+                                        <input  id="taeg" name="taeg" type="number"
                                                 onChange={this.handleChange} ref={"taeg" + this.state.client.id} required={required}/>
                                         <span className="highlight"></span><span
                                         className="bar"></span>
@@ -254,8 +255,8 @@ class Projet extends Component {
                                     </div>
 
                                     <div className="group" hidden={!this.state.checked}>
-                                        <input id="montant" name="montant" type="text"
-                                               onChange={this.handleChange} ref={"montant" + this.state.client.id} required={required}/>
+                                        <input id="montant" name="montant" type="number"
+                                               onChange={this.handleChange} ref={"montant" + this.state.client.id} />
                                         <span className="highlight"></span><span
                                         className="bar"></span>
                                         <label htmlFor="cin">Montant de l'assurance par mois</label>
