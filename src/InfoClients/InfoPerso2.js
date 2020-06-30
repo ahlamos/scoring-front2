@@ -168,7 +168,7 @@ class InfoPerso2 extends Component {
                     <div className="wrapper">
                         <center><Stepper level="2" /></center>
 
-                        <form>
+                        <form onSubmit={() => this.handleSubmit(this.state.infoClient.id)}>
                             <h1>Informations Personnelles</h1>
 
                             <div className="group">
@@ -188,7 +188,7 @@ class InfoPerso2 extends Component {
                                     onChange={this.handleChange3}
                                     debug
                                     name="documentSejour"
-                                    renderInput={(params) => <TextField {...params} label="Qu il est le document de sejour" margin="normal" required={required}/>}
+                                    renderInput={(params) => <TextField {...params} label="Qu il est le document de sejour" margin="normal"/>}
                                 />
                             </div>
 
@@ -216,7 +216,7 @@ class InfoPerso2 extends Component {
 
 
                             <div className="group">
-                                <input  id="dureeLogement" name="dureeLogement" type="text"
+                                <input  id="dureeLogement" name="dureeLogement" type="number"
                                  onChange={this.handleChange}  ref={"dureeLogement" + this.state.client.id} required={required}/>
                                 <span className="highlight"></span><span
                                 className="bar"></span>
@@ -235,7 +235,7 @@ class InfoPerso2 extends Component {
                             </div>
 
                             <div className="group">
-                                <input  id="nbEnfant" name="nbEnfant" type="text"
+                                <input  id="nbEnfant" name="nbEnfant" type="number"
                                     onChange={this.handleChange} ref={"nbEnfant" + this.state.client.id} required={required}/>
                                 <span className="highlight"></span><span
                                 className="bar"></span>
@@ -255,9 +255,7 @@ class InfoPerso2 extends Component {
 
 
                             <div className="btn-box">
-                                <button className="btn btn-submit" type="submit"
-                                        onClick={() => this.handleSubmit(this.state.infoClient.id)}>Suivant
-                                </button>
+                                <button className="btn btn-submit" type="submit">Suivant</button>
                                 <Link to="/infoPerso1">
                                     <button className="btn btn-cancel" type="button">Retour</button>
 
