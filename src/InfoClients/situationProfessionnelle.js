@@ -160,7 +160,7 @@ class SituationProfessionnelle extends Component {
                     <div className="wrapper">
                         <center><Stepper level="3" /></center>
 
-                        <form>
+                        <form onSubmit={() => this.handleSubmit(this.state.infoClient.id)}>
                             <h1>Situation Professionelle</h1>
 
                             <div className="group" >
@@ -183,7 +183,7 @@ class SituationProfessionnelle extends Component {
                                     debug
                                     name="typeContrat"
                                     renderInput={(params) => <TextField {...params} label="Type de contrat" margin="normal"
-                                    required={required}/>}
+                                  
                                 />
                             </div>
 
@@ -195,25 +195,24 @@ class SituationProfessionnelle extends Component {
                                     debug
                                     name="classification"
                                     renderInput={(params) => <TextField {...params} label="Classification" margin="normal"
-                                    required={required}/>}
+                                
                                 />
                             </div>
 
 
 
                             <div className="group">
-                                <input  id="dureeContrat" name="dureeContrat" type="text" placeholder="MM/AAAA"
+                                <input  id="dureeContrat" name="dureeContrat" type="text"
                                        onChange={this.handleChange}  ref={"dureeContrat" + this.state.client.id}
                                 required={required}/>
                                 <span className="highlight"></span><span
                                 className="bar"></span>
-                                <label htmlFor="cin">Duree Contrat</label>
+                                <label htmlFor="cin">Duree Contrat ("MM/AAAA")</label>
                             </div>
 
 
                             <div className="btn-box">
-                                <button className="btn btn-submit" type="submit"
-                                        onClick={() => this.handleSubmit(this.state.infoClient.id)}>Suivant
+                                <button className="btn btn-submit" type="submit">Suivant
                                 </button>
                                 <Link to="/infoPerso2">
                                     <button className="btn btn-cancel" type="button">Retour</button>
