@@ -42,9 +42,7 @@ class PageAccueil extends Component {
                             <b>La plateforme de scoring est la nouvelle méthode pour gérer le Scoring dans la Banque Centrale Populaire</b> <br />
                             C’est une plateforme qui se base sur l’analyse des informations connues sur un client à et saisies à travers des formulaires ainsi que sur des règles de gestion pour donner une notation finale représentant la probabilité du risque encouru en octroyant un crédit ou un service à ce client.
                         </p>
-                        <p className="mobile_download_btns">
-                            <button onClick={this.openn}>fff </button>
-                        </p>
+                       
                     </div>
                 </section>
 
