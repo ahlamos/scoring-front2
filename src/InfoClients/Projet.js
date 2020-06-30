@@ -147,8 +147,8 @@ class Projet extends Component {
             .catch(err => {
                 console.error(err)
             })
-
-        var taux=(parseFloat(this.refs["montant"+key].value) *100*12)/(parseFloat(this.refs["credit"+key].value) * (parseFloat(this.refs["mois"+key].value)/12))
+        var montant=this.refs["montant"+key].value!="" ?parseFloat(this.refs["montant"+key].value):0
+        var taux=(montant*100*12)/(parseFloat(this.refs["credit"+key].value) * (parseFloat(this.refs["mois"+key].value)/12))
         var TAEG=parseFloat(this.refs["taeg"+key].value) +taux
         var tauxFinal=TAEG/(100 *12)
 
@@ -165,8 +165,8 @@ class Projet extends Component {
                 dureeRemboursement: this.refs["mois"+key].value,
                 montantMensuel: resultat,
                 taeg: this.refs["taeg"+key].value,
-                assurance: this.refs["montant"+key].value,
-                assuranceTotale: parseFloat(this.refs["montant"+key].value)*12,
+                assurance: montant,
+                assuranceTotale: montant*12,
                 montantTotalDu:this.state.montantTotalDu
             }})
         sessionStorage.setItem("client",JSON.stringify(this.state.client))
