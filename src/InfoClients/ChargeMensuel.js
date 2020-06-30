@@ -60,9 +60,10 @@ class ChargeMensuel extends Component {
     }
     handleSubmit = key => {
         const token=localStorage.getItem("token")
-        var chargeMensuelle=parseFloat(this.refs["chargeMensuelle"+key].value)
-        var montantVersement=parseFloat(this.refs["montantVersement"+key].value)
-        var montantRemboursement=parseFloat(this.refs["montantRemboursement"+key].value)
+        var chargeMensuelle=this.refs["chargeMensuelle"+key].value!="" ?parseFloat(this.refs["chargeMensuelle"+key].value):0
+        var montantVersement=this.refs["montantVersement"+key].value!="" ?parseFloat(this.refs["montantVersement"+key].value):0
+        var montantRemboursement=this.refs["montantRemboursement"+key].value!="" ?parseFloat(this.refs["montantRemboursement"+key].value):0
+        
         var somme=chargeMensuelle+montantVersement+montantRemboursement
         var revenuMensuelTotal=sessionStorage.getItem("revenuMensuelTotal")
         this.setState({sommeChargeMensuelle:somme,
@@ -142,7 +143,7 @@ class ChargeMensuel extends Component {
                         <form>
                             <h1>Charges Mensuelles</h1>
                             <div className="group">
-                                <input  id="chargeMensuelle" name="chargeMensuelle" type="text"
+                                <input  id="chargeMensuelle" name="chargeMensuelle" type="number"
                                        onChange={this.handleChange} ref={"chargeMensuelle" + this.state.client.id} required={required}/>
                                 <span className="highlight"></span><span
                                 className="bar"></span>
@@ -161,8 +162,8 @@ class ChargeMensuel extends Component {
 
 
                             <div className="group" hidden={!this.state.checkedPension}>
-                                <input  id="montantVersement" name="montantVersement" type="text"
-                                       onChange={this.handleChange} ref={"montantVersement" + this.state.client.id} required={required}/>
+                                <input  id="montantVersement" name="montantVersement" type="number"
+                                       onChange={this.handleChange} ref={"montantVersement" + this.state.client.id} />
                                 <span className="highlight"></span><span
                                 className="bar"></span>
                                 <label htmlFor="cin">Montant mensuel du versement </label>
@@ -181,8 +182,8 @@ class ChargeMensuel extends Component {
                             </div>
 
                             <div className="group" hidden={!this.state.checkedCredit}>
-                                <input  id="montantRemboursement" name="montantRemboursement" type="text"
-                                       onChange={this.handleChange}  ref={"montantRemboursement" + this.state.client.id} required={required}/>
+                                <input  id="montantRemboursement" name="montantRemboursement" type="number"
+                                       onChange={this.handleChange}  ref={"montantRemboursement" + this.state.client.id} />
                                 <span className="highlight"></span><span
                                 className="bar"></span>
                                 <label htmlFor="cin">Montant mensuel du remboursement</label>
