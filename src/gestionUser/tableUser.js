@@ -158,6 +158,7 @@ class GestionUser extends Component {
                     firstName:this.state.firstName,
                     lastName:this.state.lastName,
                     email:this.state.email,
+                    enabled:true,
                     requiredActions: [
                         "UPDATE_PASSWORD","UPDATE_PROFILE"
                     ],
